@@ -65,7 +65,6 @@ public class CrimeListFragment extends Fragment {
 
         public CrimeHolder(View itemView) {
             super(itemView);
-            //mTitleTextView = (TextView) itemView;
             itemView.setOnClickListener(this);
             mTitleTextView = (TextView)
                     itemView.findViewById(R.id.list_item_crime_title_text_view);
@@ -84,10 +83,6 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-//            Toast.makeText(getActivity(),
-//                    mCrime.getTitle() + " clicked!", Toast.LENGTH_SHORT)
-//                    .show();
-            //Intent intent = new Intent(getActivity(), CrimeActivity.class);
             Intent intent = CrimeActivity.newIntent(getActivity(), mCrime.getId());
             if (mClickListener != null) {
                 mClickListener.onCrimeHolderClick();
@@ -102,7 +97,7 @@ public class CrimeListFragment extends Fragment {
 
 
     interface OnCrimeHolderClickListener {
-        public void onCrimeHolderClick();
+        void onCrimeHolderClick();
     }
 
     private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder> {
@@ -116,8 +111,7 @@ public class CrimeListFragment extends Fragment {
         @Override
         public CrimeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            View view = layoutInflater
-                    .inflate(R.layout.list_item_crime, parent, false);
+            View view = layoutInflater.inflate(R.layout.list_item_crime, parent, false);
             return new CrimeHolder(view);
         }
 
