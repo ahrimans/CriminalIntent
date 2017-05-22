@@ -1,5 +1,6 @@
 package com.example.ahrimans.criminalintent;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -32,12 +32,26 @@ public class CrimeListFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
+    }
+
     private void updateUI() {
         CrimeLab crimeLab = CrimeLab.get(getActivity());
         List<Crime> crimes = crimeLab.getCrimes();
-        mAdapter = new CrimeAdapter(crimes);
-        mCrimeRecyclerView.setAdapter(mAdapter);
+        if (mAdapter == null) {
+            mAdapter = new CrimeAdapter(crimes);
+            mCrimeRecyclerView.setAdapter(mAdapter);
+        } else {
+            //mAdapter.notifyDataSetChanged();
+            mAdapter.notifyItemChanged(mAdapter.mPostion);
+        }
+//        mAdapter = new CrimeAdapter(crimes);
+//        mCrimeRecyclerView.setAdapter(mAdapter);
     }
+
 
     private class CrimeHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
@@ -45,6 +59,7 @@ public class CrimeListFragment extends Fragment {
         private TextView mTitleTextView;
         private TextView mDateTextView;
         private CheckBox mSolvedCheckBox;
+        private OnCrimeHolderClickListener mClickListener;
 
         private Crime mCrime;
 
@@ -69,14 +84,30 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(getActivity(),
-                    mCrime.getTitle() + " clicked!", Toast.LENGTH_SHORT)
-                    .show();
+//            Toast.makeText(getActivity(),
+//                    mCrime.getTitle() + " clicked!", Toast.LENGTH_SHORT)
+//                    .show();
+            //Intent intent = new Intent(getActivity(), CrimeActivity.class);
+            Intent intent = CrimeActivity.newIntent(getActivity(), mCrime.getId());
+            if (mClickListener != null) {
+                mClickListener.onCrimeHolderClick();
+            }
+            startActivity(intent);
         }
+
+        public void setOnCrimeHolderClickListener(OnCrimeHolderClickListener listener) {
+            mClickListener = listener;
+        }
+    }
+
+
+    interface OnCrimeHolderClickListener {
+        public void onCrimeHolderClick();
     }
 
     private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder> {
         private List<Crime> mCrimes;
+        public int mPostion;
 
         public CrimeAdapter(List<Crime> crimes) {
             mCrimes = crimes;
@@ -91,9 +122,16 @@ public class CrimeListFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(CrimeHolder holder, int position) {
+        public void onBindViewHolder(final CrimeHolder holder, int position) {
             Crime crime = mCrimes.get(position);
+            holder.itemView.setTag(position);
             holder.bindCrime(crime);
+            holder.setOnCrimeHolderClickListener(new OnCrimeHolderClickListener() {
+                @Override
+                public void onCrimeHolderClick() {
+                    mPostion = (int) holder.itemView.getTag();
+                }
+            });
         }
 
         @Override
