@@ -8,6 +8,7 @@
     <string name="time_picker_title">时间:</string>
     <string name="new_crime">新增</string>
     <string name="del_crime">删除</string>
+    <string name="empty_crime_list">没有crime记录可以显示</string>
     <string name="show_subtitle">显示</string>
     <string name="hide_subtitle">隐藏</string>
     <string name="subtitle_format">%1$d 条</string>
