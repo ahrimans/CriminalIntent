@@ -22,12 +22,6 @@ public class CrimeLab {
 
     private CrimeLab(Context context) {
         mCrimes = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            Crime crime = new Crime();
-            crime.setTitle("Crime #" + i);
-            crime.setSolved(i % 2 == 0); // Every other one
-            mCrimes.add(crime);
-        }
     }
 
     private List<Crime> mCrimes;
@@ -45,13 +39,7 @@ public class CrimeLab {
         return null;
     }
 
-    public int getIndex(UUID id) {
-
-        for (Crime crime : mCrimes) {
-            if (crime.getId().equals(id)) {
-                return mCrimes.indexOf(crime);
-            }
-        }
-        return -1;
+    public void addCrime(Crime c) {
+        mCrimes.add(c);
     }
 }
