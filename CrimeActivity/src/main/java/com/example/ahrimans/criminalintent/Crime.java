@@ -8,6 +8,8 @@ import java.util.UUID;
  */
 
 public class Crime {
+
+
     public UUID getId() {
         return mId;
     }
@@ -48,8 +50,11 @@ public class Crime {
     private boolean mSolved;
 
     public Crime() {
-        // Generate unique identifier
-        mId = UUID.randomUUID();
+        this(UUID.randomUUID());
+    }
+
+    public Crime(UUID id) {
+        mId = id;
         mDate = new Date();
     }
 
