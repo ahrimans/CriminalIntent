@@ -42,4 +42,9 @@ public class CrimeLab {
     public void addCrime(Crime c) {
         mCrimes.add(c);
     }
+
+    public void delCrime(Crime c) {
+        if (mCrimes != null)
+            mCrimes.remove(c);
+    }
 }
