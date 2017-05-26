@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -9,7 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:padding="4dp"
-        android:text="已解决"/>
+        android:text="@string/crime_solved_label"
+        tools:ignore="RtlHardcoded"/>
 
     <TextView
         android:id="@+id/list_item_crime_title_text_view"
@@ -17,7 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/list_item_crime_solved_check_box"
         android:padding="4dp"
-        android:text="标题"/>
+        android:text="@string/crime_title_label"
+        tools:ignore="RtlHardcoded"/>
 
     <TextView
         android:id="@+id/list_item_crime_date_text_view"
@@ -26,6 +29,7 @@
         android:layout_below="@+id/list_item_crime_title_text_view"
         android:layout_toLeftOf="@+id/list_item_crime_solved_check_box"
         android:padding="4dp"
-        android:text="时间"/>
+        android:text="@string/crime_details_label"
+        tools:ignore="RtlHardcoded"/>
 
 </RelativeLayout>

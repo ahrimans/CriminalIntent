@@ -48,6 +48,23 @@ public class Crime {
 
     private Date mDate;
     private boolean mSolved;
+    private String mSuspect;
+
+    public String getSuspectPhoneId() {
+        return mSuspectPhoneId;
+    }
+
+    public void setSuspectPhoneId(String suspectPhoneId) {
+        mSuspectPhoneId = suspectPhoneId;
+    }
+
+    private String mSuspectPhoneId;
+    public String getSuspect() {
+        return mSuspect;
+    }
+    public void setSuspect(String suspect) {
+        mSuspect = suspect;
+    }
 
     public Crime() {
         this(UUID.randomUUID());
@@ -56,6 +73,9 @@ public class Crime {
     public Crime(UUID id) {
         mId = id;
         mDate = new Date();
+    }
+    public String getPhotoFilename() {
+        return "IMG_" + getId().toString() + ".jpg";
     }
 
 }
