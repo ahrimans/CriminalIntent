@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import java.util.List;
 import java.util.UUID;
@@ -21,6 +22,7 @@ public class CrimePagerActivity extends AppCompatActivity {
     private List<Crime> mCrimes;
     private static final String EXTRA_CRIME_ID =
             "com.bignerdranch.android.criminalintent.crime_id";
+
     public static Intent newIntent(Context packageContext, UUID crimeId) {
         Intent intent = new Intent(packageContext, CrimePagerActivity.class);
         intent.putExtra(EXTRA_CRIME_ID, crimeId);
@@ -30,6 +32,7 @@ public class CrimePagerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("MyTest", "CrimePagerActivity onCreate");
         setContentView(R.layout.activity_crime_pager);
         UUID crimeId = (UUID) getIntent()
                 .getSerializableExtra(EXTRA_CRIME_ID);
@@ -54,5 +57,41 @@ public class CrimePagerActivity extends AppCompatActivity {
                 break;
             }
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i("MyTest", "CrimePagerActivity onStart");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i("MyTest", "CrimePagerActivity onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i("MyTest", "CrimePagerActivity onDestroy");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i("MyTest", "CrimePagerActivity onPause");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i("MyTest", "CrimePagerActivity onResume");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.i("MyTest", "CrimePagerActivity onRestart");
     }
 }

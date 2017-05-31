@@ -16,11 +16,13 @@ import android.support.v4.app.ShareCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -67,12 +69,41 @@ public class CrimeFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.i("MyTest", "CrimeFragment onCreate");
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
         mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
         mPhotoFile = CrimeLab.get(getActivity()).getPhotoFile(mCrime);
     }
+
+    @Override
+    public void onPause() {
+        Log.i("MyTest", "CrimeFragment onPause");
+        super.onPause();
+        CrimeLab.get(getActivity())
+                .updateCrime(mCrime);
+    }
+
+
+    @Override
+    public void onStart() {
+        Log.i("MyTest", "CrimeFragment onStart");
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        Log.i("MyTest", "CrimeFragment onStop");
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.i("MyTest", "CrimeFragment onDestroy");
+        super.onDestroy();
+    }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -119,7 +150,7 @@ public class CrimeFragment extends Fragment {
         });
         mDateButton = (Button) v.findViewById(R.id.crime_date);
         //mDateButton.setEnabled(false);
-        mDateButton.setOnClickListener(new View.OnClickListener() {
+        mDateButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
@@ -130,7 +161,7 @@ public class CrimeFragment extends Fragment {
             }
         });
         mTimeButton = (Button) v.findViewById(R.id.crime_time);
-        mTimeButton.setOnClickListener(new View.OnClickListener() {
+        mTimeButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
@@ -150,7 +181,7 @@ public class CrimeFragment extends Fragment {
             }
         });
         mReportButton = (Button) v.findViewById(R.id.crime_report);
-        mReportButton.setOnClickListener(new View.OnClickListener() {
+        mReportButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
 //                Intent i = new Intent(Intent.ACTION_SEND);
 //                i.setType("text/plain");
@@ -171,7 +202,7 @@ public class CrimeFragment extends Fragment {
                 ContactsContract.Contacts.CONTENT_URI);
         //pickContact.addCategory(Intent.CATEGORY_HOME);
         mSuspectButton = (Button) v.findViewById(R.id.crime_suspect);
-        mSuspectButton.setOnClickListener(new View.OnClickListener() {
+        mSuspectButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 startActivityForResult(pickContact, REQUEST_CONTACT);
             }
@@ -185,7 +216,7 @@ public class CrimeFragment extends Fragment {
             mSuspectButton.setEnabled(false);
         }
         mPhoneButton = (Button) v.findViewById(R.id.crime_phone);
-        mPhoneButton.setOnClickListener(new View.OnClickListener() {
+        mPhoneButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
 
                 String phoneid = mCrime.getSuspectPhoneId();
@@ -221,7 +252,7 @@ public class CrimeFragment extends Fragment {
             Uri uri = Uri.fromFile(mPhotoFile);
             captureImage.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         }
-        mPhotoButton.setOnClickListener(new View.OnClickListener() {
+        mPhotoButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivityForResult(captureImage, REQUEST_PHOTO);
@@ -231,12 +262,6 @@ public class CrimeFragment extends Fragment {
         return v;
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        CrimeLab.get(getActivity())
-                .updateCrime(mCrime);
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
