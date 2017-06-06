@@ -44,10 +44,12 @@ public class CrimeFragment extends Fragment {
     private static final String ARG_CRIME_ID = "crime_id";
     private static final String DIALOG_DATE = "DialogDate";
     private static final String DIALOG_Time = "DialogTime";
+    private static final String DIALOG_PICTURE = "DialogPicture";
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_Time = 1;
     private static final int REQUEST_CONTACT = 2;
     private static final int REQUEST_PHOTO = 3;
+    private static final int REQUEST_PHOTO_VIEW = 4;
     private Crime mCrime;
     private EditText mTitleField;
     private Button mDateButton;
@@ -260,6 +262,15 @@ public class CrimeFragment extends Fragment {
             }
         });
         mPhotoView = (ImageView) v.findViewById(R.id.crime_photo);
+        mPhotoView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getFragmentManager();
+                PictureFragment dialog = PictureFragment.newInstance(mCrime.getId());
+                dialog.setTargetFragment(CrimeFragment.this, REQUEST_PHOTO_VIEW);
+                dialog.show(manager, DIALOG_PICTURE);
+            }
+        });
         updatePhotoView();
         return v;
     }
