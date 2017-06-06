@@ -310,9 +310,9 @@ public class CrimeFragment extends Fragment {
                 // that is your suspect's name.
                 c.moveToFirst();
                 String suspect = c.getString(0);
-                String phoneid = c.getString(1);
+                String phone = c.getString(1);
                 mCrime.setSuspect(suspect);
-                mCrime.setSuspectPhoneId(phoneid);
+                mCrime.setSuspectPhoneId(phone);
                 mSuspectButton.setText(suspect);
                 mPhoneButton.setEnabled(true);
             } finally {
