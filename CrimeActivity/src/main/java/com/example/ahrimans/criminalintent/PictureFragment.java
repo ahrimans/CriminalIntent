@@ -16,7 +16,6 @@ import java.util.UUID;
 public class PictureFragment extends DialogFragment {
     private static final String ARG_CRIME_ID = "crime_id";
 
-    // TODO: Rename and change types of parameters
     private ImageView mPhotoView;
     private File mPhotoFile;
     private Crime mCrime;

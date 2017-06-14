@@ -13,7 +13,11 @@ public class CrimeListActivity extends SingleFragmentActivity {
         Intent intent = new Intent(packageContext, CrimeListActivity.class);
         return intent;
     }
-
+    @Override
+    protected int getLayoutResId() {
+        //return R.layout.activity_twopane;
+        return R.layout.activity_masterdetail;
+    }
     @Override
     protected Fragment createFragment() {
         return new CrimeListFragment();
