@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.ahrimans.poorwater.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:orientation="horizontal"
+        tools:ignore="DisableBaselineAlignment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            tools:ignore="NestedWeights">
+
+            <Button
+                android:id="@+id/btn_incInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onCtrlValve"
+                android:text="增加进水口"
+                tools:ignore="HardcodedText"/>
+
+            <Button
+                android:id="@+id/btn_decInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onCtrlValve"
+                android:text="减少进水口"
+                tools:ignore="HardcodedText"/>
+
+            <TextView
+                android:id="@+id/tv_numInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#0000FF"
+                android:textSize="30sp"
+                tools:ignore="HardcodedText"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_incOutput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onCtrlValve"
+                android:text="增加出水口"
+                tools:ignore="HardcodedText"/>
+
+            <Button
+                android:id="@+id/btn_decOutput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onCtrlValve"
+                android:text="减少出水口"
+                tools:ignore="HardcodedText"/>
+
+            <TextView
+                android:id="@+id/tv_numOutput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#FF0000"
+                android:textSize="30sp"
+                tools:ignore="HardcodedText"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:gravity="top|center_horizontal">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+
+</LinearLayout>
